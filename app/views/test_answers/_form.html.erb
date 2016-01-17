@@ -11,44 +11,51 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :username %><br>
-    <%= f.text_field :username %>
+  <div class="col-xs-12 col-sm-12 placeholder">
+    <div class="col-xs-4 col-xs-offset-4">
+      <h2 class="form-signin-heading">Tu nombre</h2>
+      <input type="text" id="inputEmail" name="test_answer[username]" class="form-control" placeholder="Ingresa tu nombre" required="" autofocus="">
+    </div>
   </div>
   <div class="field">
-    <%= f.label :test_id %><br>
-    <%= f.collection_select :test_id, Test.all, :id, :name %>
+    <%= f.hidden_field :test_id, :value => @test.id %>
   </div>
 
   <% Question.all.each do |question| %>
-    <h3><%= question.name %></h3>
-
-    <table>
+    <h2 class="sub-header"><%= question.name %></h2>
+    <div class="table-responsive">
+      <table class="table table-striped">
       <tbody>
         <tr>
-          <td id="columna_lateral" rowspan="7">
-            <p>Estoy de acuerdo</p>
+          <td id="columna_lateral" style="width:35%">
+            <div class="alert alert-success" role="alert">
+              <p>Estoy de acuerdo</p>
+            </div>
           </td>
           <td>
-            <% 5.times do |v| %>
-              <td>
-                <!--<i><%=v-2%></i></br>-->
-                <%= radio_button_tag "questions[#{question.id}]", v-2 %>
-              </td>
-            <% end %>
+            <div class="alert alert-info" role="alert" style="float: left;margin: 0 auto;width: 100%;">
+              <% 5.times do |v| %>
+                  <!--<i><%=2-v%></i></br>-->
+                  <div style="float: left;margin: 0 auto;width: 20%;">
+                    <%= radio_button_tag "questions[#{question.id}]", 2-v %>
+                  </div>
+              <% end %>
+            </div>
           </td>
-          <td id="columna_lateral" rowspan="7">
-            <p>No estoy de acuerdo</p>
+          <td id="columna_lateral" style="width:35%">
+            <div class="alert alert-danger" role="alert">
+              <p>No estoy de acuerdo</p>
+            </div>
           </td>
         </tr>
       </tbody>
     </table>
+  </div>
 
 
 
   <% end %>
-
   <div class="actions">
-    <%= f.submit %>
+    <button type="submit" name="commit" class="btn btn-lg btn-default" value="Finalizar" id="submit">Finalizar</button>
   </div>
 <% end %>

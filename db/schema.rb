@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160116212540) do
+ActiveRecord::Schema.define(version: 20160117085854) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "question_id"
@@ -24,15 +24,18 @@ ActiveRecord::Schema.define(version: 20160116212540) do
   create_table "metrics", force: :cascade do |t|
     t.string   "name"
     t.integer  "test_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "positive_axis"
+    t.string   "negative_axis"
   end
 
   create_table "questions", force: :cascade do |t|
     t.string   "name"
     t.integer  "metric_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.boolean  "inverted_value"
   end
 
   create_table "test_answers", force: :cascade do |t|
@@ -44,8 +47,9 @@ ActiveRecord::Schema.define(version: 20160116212540) do
 
   create_table "tests", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.text     "description"
   end
 
 end

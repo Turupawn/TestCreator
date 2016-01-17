@@ -19,6 +19,10 @@
     <%= f.label :metric_id %><br>
     <%= f.collection_select :metric_id, Metric.all, :id, :name %>
   </div>
+  <div class="field">
+    <%= f.label :inverted_value %><br>
+    <%= f.check_box :inverted_value %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

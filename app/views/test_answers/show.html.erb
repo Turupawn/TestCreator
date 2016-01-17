@@ -1,20 +1,64 @@
-<p id="notice"><%= notice %></p>
+<script src="/assets/js/Chart.js"></script>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 main">
+      <h1 class="page-header"><%=@test_answer.test.name%></h1>
 
-<p>
-  <strong>Username:</strong>
-  <%= @test_answer.username %>
-</p>
+      <p id="notice"><%= notice %></p>
 
-<% @test_answer.test.metrics.each do |metric| %>
-  <h3><%= metric.name %></h3>
-  <%final_value = 0%>
-  <% @test_answer.answers.each do |answer| %>
-    <% if answer.question.metric == metric %>
-      <% final_value+=answer.value %>
-    <% end %>
-  <% end %>
-  <%= final_value%>
-<% end %>
+      <p>
+        <strong>Username:</strong>
+        <%= @test_answer.username %>
+      </p>
 
-<%= link_to 'Edit', edit_test_answer_path(@test_answer) %> |
-<%= link_to 'Back', test_answers_path %>
+      <% @metric_totals.each do |metric| %>
+        <h3><%= metric.first.name %>: <%= metric.second %></h3>
+      <% end %>
+
+      <% if @metric_totals.first.second>0 && @metric_totals.second.second>0%>
+        <h3>Vanguardia</h3>
+      <% elsif @metric_totals.first.second>0 && @metric_totals.second.second<0%>
+        <h3>Freenlancer</h3>
+      <% elsif @metric_totals.first.second<0 && @metric_totals.second.second>0%>
+        <h3>Startup</h3>
+      <% else %>
+        <h3>Empresarial</h3>
+      <% end %>
+
+
+      <div style="width:30%">
+        <canvas id="canvas" height="450" width="450"></canvas>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+var radarChartData = {
+  labels: ["<%=@metric_totals[0].first.positive_axis%>",
+            "<%=@metric_totals[1].first.positive_axis%>",
+            "<%=@metric_totals[0].first.negative_axis%>",
+            "<%=@metric_totals[1].first.negative_axis%>"],
+  datasets: [
+    {
+      label: "My First dataset",
+      fillColor: "rgba(220,220,220,0.2)",
+      strokeColor: "rgba(220,220,220,1)",
+      pointColor: "rgba(220,220,220,1)",
+      pointStrokeColor: "#fff",
+      pointHighlightFill: "#fff",
+      pointHighlightStroke: "rgba(220,220,220,1)",
+      data: [<%=@metric_totals[0].second>0 ? @metric_totals[0].second : 0%>,
+              <%=@metric_totals[1].second>0 ? @metric_totals[1].second : 0%>,
+              <%=@metric_totals[0].second<0 ? -@metric_totals[0].second : 0%>,
+              <%=@metric_totals[1].second<0 ? -@metric_totals[1].second : 0%>]
+    }
+  ]
+};
+window.onload = function(){
+  window.myRadar = new Chart(document.getElementById("canvas").getContext("2d")).Radar(radarChartData, {
+    responsive: true
+  });
+}
+</script>

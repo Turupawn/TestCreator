@@ -1,20 +1,57 @@
 class TestAnswersController < ApplicationController
+  layout "dashboard"
   before_action :set_test_answer, only: [:show, :edit, :update, :destroy]
 
   # GET /test_answers
   # GET /test_answers.json
   def index
     @test_answers = TestAnswer.all
+
+    @test_answer=@test_answers.first
+
+    @metric_totals_group=[]
+    @test_answers.each do |test_answer|
+      @metric_totals=[]
+      test_answer.test.metrics.each do |metric|
+        metric_value = 0
+        test_answer.answers.each do |answer|
+          if answer.question.metric == metric
+            if answer.question.inverted_value
+              metric_value-=answer.value
+            else
+              metric_value+=answer.value
+            end
+          end
+        end
+        @metric_totals.push([metric,metric_value])
+      end
+      @metric_totals_group.push(@metric_totals)
+    end
   end
 
   # GET /test_answers/1
   # GET /test_answers/1.json
   def show
+    @metric_totals=[]
+    @test_answer.test.metrics.each do |metric|
+      metric_value = 0
+      @test_answer.answers.each do |answer|
+        if answer.question.metric == metric
+          if answer.question.inverted_value
+            metric_value-=answer.value
+          else
+            metric_value+=answer.value
+          end
+        end
+      end
+      @metric_totals.push([metric,metric_value])
+    end
   end
 
   # GET /test_answers/new
   def new
     @test_answer = TestAnswer.new
+    @test = Test.find_by_id(params[:test_id])
   end
 
   # GET /test_answers/1/edit

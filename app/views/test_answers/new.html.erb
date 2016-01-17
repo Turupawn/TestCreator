@@ -1,5 +1,31 @@
-<h1>New Test Answer</h1>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 main">
+      <h1 class="page-header"><%=@test.name%></h1>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', test_answers_path %>
+      <div class="row placeholders">
+        <div class="col-xs-6 col-sm-3 placeholder">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+          <h4>Label</h4>
+          <span class="text-muted">Toma menos de 12 minutos.</span>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+          <h4>Label</h4>
+          <span class="text-muted">Responde honestamente (aun si no te gusta la respuesta).</span>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+          <h4>Label</h4>
+          <span class="text-muted">Trata de no dejar ninguna respuesta como “neutral”.</span>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+          <h4>Label</h4>
+          <span class="text-muted">Something else</span>
+        </div>
+      </div>
+        <%= render 'form' %>
+    </div>
+  </div>
+</div>

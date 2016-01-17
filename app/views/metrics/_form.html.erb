@@ -19,6 +19,14 @@
     <%= f.label :test_id %><br>
     <%= f.collection_select :test_id, Test.all, :id, :name %>
   </div>
+  <div class="field">
+    <%= f.label :positive_axis %><br>
+    <%= f.text_field :positive_axis %>
+  </div>
+  <div class="field">
+    <%= f.label :negative_axis %><br>
+    <%= f.text_field :negative_axis %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
