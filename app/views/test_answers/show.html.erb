@@ -4,29 +4,14 @@
     <div class="col-sm-12 col-md-12 main">
       <h1 class="page-header"><%=@test_answer.test.name%></h1>
 
-      <p id="notice"><%= notice %></p>
+      <!--<p id="notice"><%= notice %></p>-->
 
-      <p>
-        <strong>Username:</strong>
-        <%= @test_answer.username %>
-      </p>
+      <h3>Nombre: <%= @test_answer.username %></h3>
 
-      <% @metric_totals.each do |metric| %>
-        <h3><%= metric.first.name %>: <%= metric.second %></h3>
-      <% end %>
-
-      <% if @metric_totals.first.second>0 && @metric_totals.second.second>0%>
-        <h3>Vanguardia</h3>
-      <% elsif @metric_totals.first.second>0 && @metric_totals.second.second<0%>
-        <h3>Freenlancer</h3>
-      <% elsif @metric_totals.first.second<0 && @metric_totals.second.second>0%>
-        <h3>Startup</h3>
-      <% else %>
-        <h3>Empresarial</h3>
-      <% end %>
+      <h3>Resultado: <%=@result_type%></h3>
 
 
-      <div style="width:30%">
+      <div style="width:50%">
         <canvas id="canvas" height="450" width="450"></canvas>
       </div>
 

@@ -46,6 +46,17 @@ class TestAnswersController < ApplicationController
       end
       @metric_totals.push([metric,metric_value])
     end
+
+    @result_type=""
+    if @metric_totals.first.second>0 && @metric_totals.second.second>0
+        @result_type = "Vanguardia"
+      elsif @metric_totals.first.second>0 && @metric_totals.second.second<0
+        @result_type = "Freenlancer"
+      elsif @metric_totals.first.second<0 && @metric_totals.second.second>0
+        @result_type = "Startup"
+      else
+        @result_type = "Empresarial"
+      end
   end
 
   # GET /test_answers/new

@@ -1,4 +1,5 @@
 class TestsController < ApplicationController
+  layout "landing"
   before_action :set_test, only: [:show, :edit, :update, :destroy]
 
   # GET /tests
