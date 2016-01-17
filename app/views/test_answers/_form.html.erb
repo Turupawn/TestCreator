@@ -1,0 +1,54 @@
+<%= form_for(@test_answer) do |f| %>
+  <% if @test_answer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@test_answer.errors.count, "error") %> prohibited this test_answer from being saved:</h2>
+
+      <ul>
+      <% @test_answer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :username %><br>
+    <%= f.text_field :username %>
+  </div>
+  <div class="field">
+    <%= f.label :test_id %><br>
+    <%= f.collection_select :test_id, Test.all, :id, :name %>
+  </div>
+
+  <% Question.all.each do |question| %>
+    <h3><%= question.name %></h3>
+
+    <table>
+      <tbody>
+        <tr>
+          <td id="columna_lateral" rowspan="7">
+            <p>Estoy de acuerdo</p>
+          </td>
+          <td>
+            <% 5.times do |v| %>
+              <td>
+                <!--<i><%=v-2%></i></br>-->
+                <%= radio_button_tag "questions[#{question.id}]", v-2 %>
+              </td>
+            <% end %>
+          </td>
+          <td id="columna_lateral" rowspan="7">
+            <p>No estoy de acuerdo</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

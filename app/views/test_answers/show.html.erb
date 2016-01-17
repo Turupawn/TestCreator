@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @test_answer.username %>
+</p>
+
+<% @test_answer.test.metrics.each do |metric| %>
+  <h3><%= metric.name %></h3>
+  <%final_value = 0%>
+  <% @test_answer.answers.each do |answer| %>
+    <% if answer.question.metric == metric %>
+      <% final_value+=answer.value %>
+    <% end %>
+  <% end %>
+  <%= final_value%>
+<% end %>
+
+<%= link_to 'Edit', edit_test_answer_path(@test_answer) %> |
+<%= link_to 'Back', test_answers_path %>
